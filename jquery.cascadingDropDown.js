@@ -94,6 +94,9 @@
                                         .attr("value", this.Value)
                                         .text(this.Text));
                                 });
+                                if (config.defaultValue != null) {
+                                    $this.val(config.defaultValue);
+                                }
                                 methods.loaded();
                                 $.isFunction(config.onLoaded) && config.onLoaded.call($this);
                             },
@@ -126,6 +129,7 @@
         errorText: 'Error loading data.',
         postData: null,
         onLoading: null,
-        onLoaded: null
+        onLoaded: null,
+        defaultValue: null
     }
 })(jQuery);
