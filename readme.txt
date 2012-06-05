@@ -15,6 +15,56 @@ the select list. The respose from the ajax request should be in json with the fo
        "Value": "10801"
    }] 
 
+Details:
+
+$(targetID).CascadingDropDown(sourceID, actionPath, settings)
+
+    targetID
+      The ID of the select list that will auto populate. 
+    sourceID
+      The ID of the select list, which, on change, causes the targetID to auto populate.
+    actionPath
+      The url to post to
+
+Options:
+
+    promptText
+      Text for the first item in the select list
+      Default : -- Select --
+    loadingText
+      Optional text to display in the select list while it is being loaded.
+      Default : Loading..
+    errorText
+      Optional text to display if an error occurs while populating the list
+      Default: Error loading data.
+    postData
+      Data you want posted to the url in place of the default
+      Example :
+      postData: function () {
+          return { prefix: $('#txtPrefix').val(), customerID: $('#customerID').val() };
+      }
+      will cause prefix=foo&customerID=bar to be sent as the POST body.
+      Default: A text string obtained by calling serialize on the sourceID
+    onLoading (event)
+      Raised before the list is populated.
+    onLoaded (event)
+      Raised after the list is populated, The code below shows how to “animate” the  select list after load.
+    defaultValue
+      Optional value that you want to be selected after the dropdown is initialized
+
+
+Example using custom options:
+
+  $("#orderID").CascadingDropDown("#customerID", '/Sales/AsyncOrders',
+  {
+    promptText: '-- Pick an Order--',
+    onLoading: function () {
+        $(this).css("background-color", "#ff3");
+    },
+    onLoaded: function () {
+        $(this).animate({ backgroundColor: '#ffffff' }, 300);
+    }
+  });
 
 Licensed under the MIT:
 http://www.opensource.org/licenses/mit-license.php
